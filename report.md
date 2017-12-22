@@ -22,7 +22,7 @@ My pipeline is made up of the following steps...
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
 - Calculate slope and use slope to determine if the line is left or right
 - filter out all slope below 0.5 (or nearly horizontal line)
-- then average the left lane and then average the right lane
+- then by toggling with mix & max value to find the best fit line
 
 ### 2. Identify potential shortcomings with your current pipeline
 
