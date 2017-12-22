@@ -86,16 +86,17 @@ def draw_lines(img, lines, color=[255, 0, 0], thickness=10):
     if len(left.shape) != 2 or len(right.shape) != 2:
         return
 
-    left_line = [left.mean(axis=0)[0], left.mean(axis=0)[1], left.mean(axis=0)[2], left.mean(axis=0)[3]]
-    left_line = np.asarray(left_line).astype(int)
-    # left_line = [left.min(axis=0)[0], left.min(axis=0)[1], left.max(axis=0)[2], left.max(axis=0)[3]]
-    cv2.line(img, (left_line[0], left_line[1]), (left_line[2], left_line[3]), color, thickness)
+    # maximize line width
+    left_line = [left.min(axis=0)[0], left.max(axis=0)[1], left.max(axis=0)[2], left.min(axis=0)[3]]
+    right_line = [right.min(axis=0)[0], right.min(axis=0)[1], right.max(axis=0)[2], right.max(axis=0)[3]]
 
-    right_line = [right.mean(axis=0)[0], right.mean(axis=0)[1], right.mean(axis=0)[2], right.mean(axis=0)[3]]
+    # convert float array to int 32 array 
+    left_line = np.asarray(left_line).astype(int)
     right_line = np.asarray(right_line).astype(int)
-    # right_line = [right.max(axis=0)[0], right.max(axis=0)[1], right.min(axis=0)[2], right.min(axis=0)[3]]
+    
+    # draw line
     cv2.line(img, (right_line[0], right_line[1]), (right_line[2], right_line[3]), color, thickness)
-        
+    cv2.line(img, (left_line[0], left_line[1]), (left_line[2], left_line[3]), color, thickness)
 
 def hough_lines(img, rho, theta, threshold, min_line_len, max_line_gap, isRGB=True):
     """

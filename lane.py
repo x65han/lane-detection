@@ -49,7 +49,6 @@ for index, img_name in enumerate(os.listdir(input_dir)):
     result = process_image(img, False)
     cv2.imwrite(output_dir + img_name, result)
     print("saved " + output_dir + img_name)
-    # break
 
 # process video
 white_output = 'test_videos_output/solidWhiteRight.mp4'
